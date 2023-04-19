@@ -5,9 +5,19 @@
 
 struct Node
 {
+	int _data;
+	Node* _left;
+	Node* _right;
+	unsigned char _height;
+	Node(int value = 0)
+	{
+		_data = value;
+		_left = _right = NULL;
+		_height = 1;
+	}
 };
 
-class Tree
+class Set
 {
  private:
  public:
