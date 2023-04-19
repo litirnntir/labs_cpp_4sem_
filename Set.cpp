@@ -27,7 +27,14 @@ bool Set::insert(int key)
 
 Node* Set::_findMin(Node* root)
 {
-	return root->_left ? _findMin(root->_left) : root;
+	if (root->_left)
+	{
+		return _findMin(root->_left);
+	}
+	else
+	{
+		return root;
+	}
 }
 
 Node* Set::_erase(Node* root, int key)
@@ -101,3 +108,36 @@ bool Set::contains(int key) const
 		return false;
 	}
 }
+void Set::_copy(const Node* obj)
+{
+	insert(obj->_data);
+	if(obj->_left)
+		_copy(obj->_left);
+	if(obj->_right)
+		_copy(obj->_right);
+}
+Set::Set(const Set& obj)
+{
+	_destructor(_root);
+	_copy(obj._root);
+}
+Set::~Set()
+{
+	if (_root)
+		_destructor(_root);
+}
+void Set::_destructor(Node* obj)
+{
+	if(obj->_left)
+		_destructor(obj->_left);
+	if(obj->_right)
+		_destructor(obj->_right);
+	delete obj;
+}
+Set::Set()
+{
+	_root = nullptr;
+}
+
+
+

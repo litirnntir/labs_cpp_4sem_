@@ -25,7 +25,12 @@ class Set
 	bool _insert(Node*& root, int value);
 	Node* _erase(Node* root, int key);
 	Node* _contains(Node* root, int value) const;
+	void _copy(const Node* obj);
+	void _destructor(Node* obj);
  public:
+	Set();
+	Set(const Set& obj);
+	~Set();
 	bool contains(int key) const;
 	bool insert(int key);
 	bool erase(int key);
