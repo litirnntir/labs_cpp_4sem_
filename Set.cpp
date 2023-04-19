@@ -153,7 +153,7 @@ void Set::_print(const Node* obj, int level)
 	{
 		_print(obj->_right, level + 1);
 		for (int i = 0; i < level; i++)
-			std::cout << "   ";
+			std::cout << " ";
 		std::cout << obj->_data << std::endl;
 		_print(obj->_left, level + 1);
 	}

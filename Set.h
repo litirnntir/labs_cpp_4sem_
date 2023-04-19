@@ -20,22 +20,22 @@ struct Node
 class Set
 {
  private:
-	Node* _findMin(Node* root);
 	Node* _root;
+	void _print(const Node* obj, int level = 10);
+	Node* _contains(Node* root, int value) const;
 	bool _insert(Node*& root, int value);
 	Node* _erase(Node* root, int key);
-	Node* _contains(Node* root, int value) const;
 	void _copy(const Node* obj);
 	void _destructor(Node* obj);
-	void _print(const Node* obj, int level = 10);
+	Node* _findMin(Node* root);
  public:
-	Set();
-	Set(const Set& obj);
-	~Set();
+	Set& operator=(const Set& obj);
 	bool contains(int key) const;
 	bool insert(int key);
 	bool erase(int key);
-	Set& operator=(const Set& obj);
+	Set(const Set& obj);
 	void print();
+	~Set();
+	Set();
 };
 #endif
