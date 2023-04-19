@@ -20,9 +20,14 @@ struct Node
 class Set
 {
  private:
+	Node* _findMin(Node* root);
 	Node* _root;
 	bool _insert(Node*& root, int value);
+	Node* _erase(Node* root, int key);
+	Node* _contains(Node* root, int value) const;
  public:
+	bool contains(int key) const;
 	bool insert(int key);
+	bool erase(int key);
 };
 #endif
