@@ -20,7 +20,9 @@ struct Node
 class Set
 {
  private:
+	Node* _root;
+	bool _insert(Node*& root, int value);
  public:
-
+	bool insert(int key);
 };
 #endif
