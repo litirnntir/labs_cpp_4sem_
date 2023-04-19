@@ -138,6 +138,11 @@ Set::Set()
 {
 	_root = nullptr;
 }
+Set& Set::operator=(const Set& obj)
+{
+	_copy(obj._root);
+	return (*this);
+}
 
 
 

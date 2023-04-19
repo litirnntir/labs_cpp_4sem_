@@ -34,5 +34,6 @@ class Set
 	bool contains(int key) const;
 	bool insert(int key);
 	bool erase(int key);
+	Set& operator=(const Set& obj);
 };
 #endif
