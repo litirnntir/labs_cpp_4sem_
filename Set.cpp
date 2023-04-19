@@ -84,14 +84,18 @@ bool Set::erase(int key)
 }
 Node* Set::_contains(Node* root, int value) const
 {
-	while (root != NULL && root->_data != value) {
-		if (value == root->_data) {
+	while (root != NULL && root->_data != value)
+	{
+		if (value == root->_data)
+		{
 			return root;
 		}
-		else if (value < root->_data) {
+		else if (value < root->_data)
+		{
 			root = root->_left;
 		}
-		else {
+		else
+		{
 			root = root->_right;
 		}
 	}
@@ -111,9 +115,9 @@ bool Set::contains(int key) const
 void Set::_copy(const Node* obj)
 {
 	insert(obj->_data);
-	if(obj->_left)
+	if (obj->_left)
 		_copy(obj->_left);
-	if(obj->_right)
+	if (obj->_right)
 		_copy(obj->_right);
 }
 Set::Set(const Set& obj)
@@ -128,9 +132,9 @@ Set::~Set()
 }
 void Set::_destructor(Node* obj)
 {
-	if(obj->_left)
+	if (obj->_left)
 		_destructor(obj->_left);
-	if(obj->_right)
+	if (obj->_right)
 		_destructor(obj->_right);
 	delete obj;
 }
@@ -143,6 +147,20 @@ Set& Set::operator=(const Set& obj)
 	_copy(obj._root);
 	return (*this);
 }
+void Set::_print(const Node* obj, int level)
+{
+	if (obj)
+	{
+		_print(obj->_right, level + 1);
+		for (int i = 0; i < level; i++)
+			std::cout << "   ";
+		std::cout << obj->_data << std::endl;
+		_print(obj->_left, level + 1);
+	}
+}
 
-
-
+void Set::print()
+{
+	if (!_root) throw "It is empty";
+	_print(_root);
+}

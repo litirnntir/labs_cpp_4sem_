@@ -27,6 +27,7 @@ class Set
 	Node* _contains(Node* root, int value) const;
 	void _copy(const Node* obj);
 	void _destructor(Node* obj);
+	void _print(const Node* obj, int level = 10);
  public:
 	Set();
 	Set(const Set& obj);
@@ -35,5 +36,6 @@ class Set
 	bool insert(int key);
 	bool erase(int key);
 	Set& operator=(const Set& obj);
+	void print();
 };
 #endif
