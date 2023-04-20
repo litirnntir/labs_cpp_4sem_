@@ -1,28 +1,27 @@
 #include "Set.h"
 
-bool Set::_insert(Node*& root, int value)
+Node* Set::_insert(Node* root, int data)
 {
 	if (!root)
 	{
-		root = new Node(value);
-		return true;
+		root = new Node(data);
 	}
-	if (root->_data == value)
+	else if (data < root->_data)
 	{
-		return false;
+		root->_left = _insert(root->_left, data);
 	}
-	if (root->_data > value)
+	else if (data > root->_data)
 	{
-		return _insert(root->_left, value);
+		root->_right = _insert(root->_right, data);
 	}
-	else
-	{
-		return _insert(root->_right, value);
-	}
+	else if (data == root->_data)
+		throw "The element is already exist";
+	return _balance(root);
 }
 bool Set::insert(int key)
 {
-	return _insert(_root, key);
+	_root = _insert(_root, key);
+	return true;
 }
 
 Node* Set::_findMin(Node* root)
@@ -84,7 +83,7 @@ bool Set::erase(int key)
 }
 Node* Set::_contains(Node* root, int value) const
 {
-	while (root != NULL && root->_data != value)
+	while (root != nullptr && root->_data != value)
 	{
 		if (value == root->_data)
 		{
@@ -213,18 +212,33 @@ Node* Set::_rotateLeft(Node* q)
 Node* Set::_balance(Node* root)
 {
 	_fixHeight(root);
-	if (_balanceFactor(root) == -2)
-	{
-		if (_balanceFactor(root->_left) > 0)
-			root->_left = _rotateLeft(root->_left);
-		return _rotateRight(root);
-	}
 	if (_balanceFactor(root) == 2)
 	{
 		if (_balanceFactor(root->_right) < 0)
 			root->_right = _rotateRight(root->_right);
 		return _rotateLeft(root);
 	}
+	if (_balanceFactor(root) == -2)
+	{
+		if (_balanceFactor(root->_left) > 0)
+			root->_left = _rotateLeft(root->_left);
+		return _rotateRight(root);
+	}
 	return root;
 }
+
+Node* Set::_balanced(Node* root)
+{
+	if (!root)
+	{
+		return NULL;
+	}
+	root = _balance(root);
+	root->_left = _balanced(root->_left);
+	root->_right = _balanced(root->_right);
+	return _balance(root);
+}
+
+
+
 

@@ -40,27 +40,50 @@ int menu()
 	return n;
 }
 
-std::vector<int> deleteDuplicate(std::vector<int>& data)
+std::vector<int> findDuplicates(const std::vector<int>& vec)
 {
-	std::vector<int> result;
-	bool flag = false;
-	for (auto it = data.begin(); it != data.end(); it++)
+	Set tree;
+	std::vector<int> duplicates;
+
+	for (int i : vec)
 	{
-		for (auto iter = it + 1; iter != data.end(); iter++)
+		if (tree.contains(i))
 		{
-			if (*it == *iter)
+			if (find(duplicates.begin(), duplicates.end(), i) == duplicates.end())
 			{
-				data.erase(iter--);
-				flag = true;
+				duplicates.push_back(i);
 			}
 		}
-		if (!flag)
+		else
 		{
-			result.push_back(*it);
+			tree.insert(i);
 		}
-		flag = false;
 	}
-	return result;
+	return duplicates;
+}
+
+std::vector<int> deleteDuplicate(std::vector<int>& a)
+{
+	std::vector<int> duplicates = findDuplicates(a);
+	Set tmp1 = Set();
+
+	for (auto iter = duplicates.begin(); iter != duplicates.end(); iter++)
+	{
+		if (!tmp1.contains(*iter))
+		{
+			tmp1.insert(*iter);
+		}
+	}
+
+	for (auto it = a.begin(); it != a.end();)
+	{
+		if (tmp1.contains(*it))
+		{ a.erase(it); }
+		else
+		{ ++it; }
+	}
+
+	return a;
 }
 
 void task()
@@ -96,12 +119,16 @@ void task()
 		else
 			flag = false;
 	}
-	std::vector<int> tmp;
-	tmp = deleteDuplicate(a);
-	for (int& it : tmp)
+
+	std::vector<int> b = deleteDuplicate(a);
+
+	std::cout << "New vector";
+
+	for (int& iter : b)
 	{
-		std::cout << it;
+		std::cout << iter;
 	}
+
 	getchar();
 }
 
@@ -139,7 +166,6 @@ void print(Set& obj)
 	obj.print();
 	getchar();
 }
-
 
 void createVector(int size)
 {
@@ -267,7 +293,6 @@ void addEraseVector(int size)
 			  << std::endl;
 	getchar();
 }
-
 
 void addEraseVectorTime(int size)
 {
@@ -405,3 +430,6 @@ int main()
 		n = menu();
 	}
 }
+
+// Доп задача
+// Применить балансировку

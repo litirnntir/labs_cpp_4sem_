@@ -23,23 +23,23 @@ class Set
 	Node* _root;
 	void _print(const Node* obj, int level = 10);
 	Node* _contains(Node* root, int value) const;
-	bool _insert(Node*& root, int value);
+	Node* _insert(Node* root, int data);
 	Node* _erase(Node* root, int key);
 	void _copy(const Node* obj);
 	void _destructor(Node* obj);
 	Node* _findMin(Node* root);
 	void _fixHeight(Node* p);
-	Node* _balance(Node* p);
+	Node* _balance(Node* root);
 	int _balanceFactor(Node* p);
 	Node* _rotateRight(Node* p);
 	Node* _rotateLeft(Node* q);
+	Node* _balanced(Node* root);
  public:
 	Set& operator=(const Set& obj);
 	bool contains(int key) const;
 	bool insert(int key);
 	bool erase(int key);
 	Set(const Set& obj);
-	bool balance();
 	void print();
 	~Set();
 	Set();
