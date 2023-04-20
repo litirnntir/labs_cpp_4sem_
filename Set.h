@@ -28,12 +28,18 @@ class Set
 	void _copy(const Node* obj);
 	void _destructor(Node* obj);
 	Node* _findMin(Node* root);
+	void _fixHeight(Node* p);
+	Node* _balance(Node* p);
+	int _balanceFactor(Node* p);
+	Node* _rotateRight(Node* p);
+	Node* _rotateLeft(Node* q);
  public:
 	Set& operator=(const Set& obj);
 	bool contains(int key) const;
 	bool insert(int key);
 	bool erase(int key);
 	Set(const Set& obj);
+	bool balance();
 	void print();
 	~Set();
 	Set();

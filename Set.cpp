@@ -164,3 +164,67 @@ void Set::print()
 	if (!_root) throw "It is empty";
 	_print(_root);
 }
+
+unsigned char height(Node* p)
+{
+	if (p) return p->_height;
+	else return 0;
+}
+
+void Set::_fixHeight(Node* p)
+{
+	unsigned char hl = height(p->_left);
+	unsigned char hr = height(p->_right);
+	if (hl > hr)
+	{
+		p->_height = hl + 1;
+	}
+	else
+	{
+		p->_height = hr + 1;
+	}
+}
+
+int Set::_balanceFactor(Node* p)
+{
+	return height(p->_right) - height(p->_left);
+}
+
+Node* Set::_rotateRight(Node* p)
+{
+	Node* q = p->_left;
+	p->_left = q->_right;
+	q->_right = p;
+	_fixHeight(p);
+	_fixHeight(q);
+	return q;
+}
+
+Node* Set::_rotateLeft(Node* q)
+{
+	Node* p = q->_right;
+	q->_right = p->_left;
+	p->_left = q;
+	_fixHeight(q);
+	_fixHeight(p);
+	return p;
+}
+
+Node* Set::_balance(Node* root)
+{
+	_fixHeight(root);
+	if (_balanceFactor(root) == -2)
+	{
+		if (_balanceFactor(root->_left) > 0)
+			root->_left = _rotateLeft(root->_left);
+		return _rotateRight(root);
+	}
+	if (_balanceFactor(root) == 2)
+	{
+		if (_balanceFactor(root->_right) < 0)
+			root->_right = _rotateRight(root->_right);
+		return _rotateLeft(root);
+	}
+	return root;
+}
+

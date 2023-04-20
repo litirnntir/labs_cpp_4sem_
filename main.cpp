@@ -140,6 +140,7 @@ void print(Set& obj)
 	getchar();
 }
 
+
 void createVector(int size)
 {
 	clock_t start, end;
@@ -267,6 +268,7 @@ void addEraseVector(int size)
 	getchar();
 }
 
+
 void addEraseVectorTime(int size)
 {
 	clock_t start, end;
@@ -393,7 +395,7 @@ int main()
 				time();
 			}
 		}
-		catch (char* err)
+		catch (const char* err)
 		{
 			std::cout << err;
 			getchar();
