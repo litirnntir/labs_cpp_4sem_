@@ -37,6 +37,7 @@ std::vector<int> deleteDuplicate(std::vector<int>& data)
 	return result;
 }
 
+
 void task()
 {
 	int number;
