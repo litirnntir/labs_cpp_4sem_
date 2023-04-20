@@ -72,24 +72,32 @@ void task()
 	}
 	std::vector<int> tmp;
 	tmp = deleteDuplicate(a);
-	for (int & it : tmp)
+	for (int& it : tmp)
 	{
 		std::cout << it;
 	}
 	getchar();
 }
 
+int menu()
+{
+	std::cout << "1. Add an element" << std::endl;
+	std::cout << "2. Checking an element" << std::endl;
+	std::cout << "3. Delete an element" << std::endl;
+	std::cout << "4. Print" << std::endl;
+	std::cout << "5. Exercise" << std::endl;
+	std::cout << "7. Exit" << std::endl;
+	std::cout << "Enter number: ";
+	int n = check();
+	while (n > 7 || n <= 0)
+	{
+		std::cout << "Incorrect number" << std::endl << "Enter number: ";
+		n = check();
+	}
+	return n;
+}
+
 int main()
 {
-	Set a = Set();
-	a.insert(5);
-	a.insert(2);
-	a.insert(3);
-	a.insert(1);
-	a.insert(5);
-	a.erase(5);
-	std::cout << a.contains(1);
-	a.print();
-	std::vector<int> b = {1,2,3,4};
-	task();
+	menu();
 }
